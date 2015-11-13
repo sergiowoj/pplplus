@@ -1,0 +1,240 @@
+<div class="form-group" >
+	<label class="col-sm-2 control-label" >Nome</label >
+	<div class="col-sm-10" >
+		<input type="text"
+		       class="form-control"
+		       name="name"
+		       ng-model="employees.selectedEmployee.name"
+		       required />
+	</div >
+</div >
+<div class="form-group" >
+	<label class="col-sm-2 control-label" >Sobrenome</label >
+	<div class="col-sm-10" >
+		<input type="text"
+		       class="form-control"
+		       name="name"
+		       ng-model="employees.selectedEmployee.surname"
+		       required />
+	</div >
+</div >
+<div class="form-group" >
+	<label class="col-sm-2 control-label" >Email</label >
+	<div class="col-sm-10" >
+		<input type="email"
+		       name="email"
+		       class="form-control"
+		       ng-model="employees.selectedEmployee.email"
+		       required />
+	</div >
+</div >
+<div class="form-group" >
+	<label class="col-sm-2 control-label" >Photo</label >
+	<div class="col-sm-10" >
+		<input type="text"
+		       class="form-control"
+		       name="photo"
+		       ng-model="employees.selectedEmployee.photo"
+				/>
+	</div >
+</div >
+<div class="form-group" >
+	<label class="col-sm-2 control-label" >Sexo</label >
+	<div class="col-sm-10" >
+
+		<select name="sex"
+		        class="form-control"
+		        ng-model="employees.selectedEmployee.sex"
+		        id="" disabled>
+			<option value="M" >Male</option >
+			<option value="F" >Female</option >
+		</select >
+	</div >
+</div >
+<div class="form-group" >
+	<label class="col-sm-2 control-label" >Data de nascimento</label >
+	<div class="col-sm-10" >
+		<input type="text"
+		       name="birthdate"
+		       class="form-control"
+		       ng-model="employees.selectedEmployee.birthdate"
+		       bs-datepicker
+				/>
+	</div >
+
+</div >
+<div class="form-group" >
+	<label class="col-sm-2 control-label" >Telefone</label >
+	<div class="col-sm-10" >
+		<input type="tel"
+		       name="phones"
+		       class="form-control"
+		       ng-model="employees.selectedEmployee.phones"
+				/>
+	</div >
+
+</div >
+<div class="form-group" >
+	<label class="col-sm-2 control-label" >Endereço 1</label >
+	<div class="col-sm-10" >
+		<input type="text"
+		       name="home_address1"
+		       class="form-control"
+		       ng-model="employees.selectedEmployee.home_address1"
+				/>
+	</div >
+</div >
+<div class="form-group" >
+	<label class="col-sm-2 control-label" >Endereço 2</label >
+	<div class="col-sm-10" >
+		<input type="text"
+		       name="home_address2"
+		       class="form-control"
+		       ng-model="employees.selectedEmployee.home_address2"
+				/>
+	</div >
+</div >
+
+<div class="form-group" >
+	<label class="col-sm-2 control-label" >Endereço de trabalho 1</label >
+	<div class="col-sm-10" >
+		<input type="text"
+		       name="work_address1"
+		       class="form-control"
+		       ng-model="employees.selectedEmployee.work_address1"
+				/>
+	</div >
+</div >
+<div class="form-group" >
+	<label class="col-sm-2 control-label" >Endereço 2</label >
+	<div class="col-sm-10" >
+		<input type="text"
+		       name="work_address2"
+		       class="form-control"
+		       ng-model="employees.selectedEmployee.work_address2"
+				/>
+	</div >
+</div >
+
+<div class="form-group">
+	<label class="col-sm-2 control-label" >Cidade</label >
+	<div class="col-sm-10" >
+		<input type="text"
+		       name="city"
+		       class="form-control"
+		       ng-model="employees.selectedEmployee.city"
+			   disabled	/>
+	</div >
+</div >
+
+<div class="form-group" >
+	<label class="col-sm-2 control-label" >Country</label >
+	<div class="col-sm-10" >
+		<input type="text"
+		       name="country"
+		       class="form-control"
+		       ng-model="employees.selectedEmployee.country"
+				disabled	/>
+	</div >
+</div >
+
+<div class="form-group" >
+	<label class="col-sm-2 control-label" >CPF</label >
+	<div class="col-sm-10" >
+		<input type="text"
+		       name="cpf"
+		       class="form-control"
+		       ng-model="employees.selectedEmployee.cpf"
+			/>
+	</div >
+</div >
+<div class="form-group" >
+	<label class="col-sm-2 control-label" >RG</label >
+	<div class="col-sm-10" >
+		<input type="text"
+		       name="rg"
+		       class="form-control"
+		       ng-model="employees.selectedEmployee.rg"
+			/>
+	</div >
+</div >
+<div class="form-group" >
+	<label class="col-sm-2 control-label" >Cargo</label >
+	<div class="col-sm-10" >
+		<input type="text"
+		       name="job_title"
+		       class="form-control"
+		       ng-model="employees.selectedEmployee.job_title"
+			   required />
+	</div >
+</div >
+<div class="form-group" >
+	<label class="col-sm-2 control-label" >Matrícula</label >
+	<div class="col-sm-10" >
+		<input type="text"
+		       name="number"
+		       class="form-control"
+		       ng-model="employees.selectedEmployee.number"
+			/>
+	</div >
+</div >
+<div class="form-group" >
+	<label class="col-sm-2 control-label" >Salário</label >
+	<div class="col-sm-10" >
+		<input type="text"
+		       name="base_sallary"
+		       class="form-control"
+		       ng-model="employees.selectedEmployee.base_sallary"
+			/>
+	</div >
+</div >
+<div class="form-group" >
+	<label class="col-sm-2 control-label" >Adicional</label >
+	<div class="col-sm-10" >
+		<input type="text"
+		       name="additional_sallary"
+		       class="form-control"
+		       ng-model="employees.selectedEmployee.additional_sallary"
+			/>
+	</div >
+</div >
+<div class="form-group" >
+	<label class="col-sm-2 control-label" >Admissão</label >
+	<div class="col-sm-10" >
+		<input type="text"
+		       name="admission"
+		       class="form-control"
+		       ng-model="employees.selectedEmployee.admission"
+			/>
+	</div >
+</div >
+<div class="form-group" >
+	<label class="col-sm-2 control-label" >Conta no banco</label >
+	<div class="col-sm-10" >
+		<input type="text"
+		       name="number"
+		       class="form-control"
+		       ng-model="employees.selectedEmployee.bank_account_number"
+			/>
+	</div >
+</div >
+<div class="form-group" >
+	<label class="col-sm-2 control-label" >Agência</label >
+	<div class="col-sm-10" >
+		<input type="text"
+		       name="bank_agency_number"
+		       class="form-control"
+		       ng-model="employees.selectedEmployee.bank_agency_number"
+			/>
+	</div >
+</div >
+<div class="form-group" >
+	<label class="col-sm-2 control-label" >Dias de Trabalho</label >
+	<div class="col-sm-10" >
+		<input type="text"
+		       name="workdays"
+		       class="form-control"
+		       ng-model="employees.selectedEmployee.workdays"
+			/>
+	</div >
+</div >
