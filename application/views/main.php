@@ -19,7 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div class="container" >
 			<div class="navbar-header" >
 				<a class="navbar-brand"
-				   href="/" >ppl+
+				   href="#/" >ppl+
 				</a >
 			</div >
 
@@ -40,7 +40,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div >
 	</nav >
 	
-	<div class="container main-container">
+	<div class="container-fluid main-container">
 		<div ui-view="right-menu"></div>
 		<div ui-view="main"></div>
 

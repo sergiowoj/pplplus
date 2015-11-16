@@ -67,7 +67,7 @@ app.config(function($resourceProvider, laddaProvider, $datepickerProvider) {
 });
 
 app.factory('Employee', function($resource){
-	return $resource("http://localhost/rh2/api/employees/:cpf", {cpf:'@cpf'}, {
+	return $resource("http://localhost/pplplus/api/employees/:cpf", {cpf:'@cpf'}, {
 		update: {
 			method: 'PUT'
 		}
@@ -105,9 +105,40 @@ app.controller('EmployeeListController', function($scope, $state, EmployeeServic
 });
 
 app.controller('EmployeeCreateController', function($scope, $state, EmployeeService){
-	$scope.mode = "Create";
+	$scope.mode = "create";
 	$scope.employees = EmployeeService;
 	$scope.employees.selectedEmployee = {};
+	$scope.tabs = [
+		{
+			'title': 'Informações Pessoais',
+			'contentTag' : 'info-pessoal'
+		},
+		{
+			'title': 'Informações Profissionais',
+			'contentTag' : 'info-profissional'
+		},
+		{
+			'title': 'Documentos',
+			'contentTag' : 'documentos'
+		},
+		{
+			'title': 'Ativos alocados',
+			'contentTag' : 'ativos'
+		},
+		{
+			'title': 'Relatórios',
+			'contentTag' : 'relatorios'
+		},
+		{
+			'title': 'Emergência',
+			'contentTag' : 'emergencia'
+		},
+		{
+			'title': 'Observações',
+			'contentTag' : 'obs'
+		}		
+	];
+	$scope.tabs.activeTab = 'info-pessoal';
 
 	$scope.save = function () {
 		$scope.employees.createEmployee($scope.employees.selectedEmployee).then(function () {
@@ -117,8 +148,39 @@ app.controller('EmployeeCreateController', function($scope, $state, EmployeeServ
 });
 
 app.controller('EmployeeEditController', function($scope, $stateParams, $state, EmployeeService){
-	$scope.mode = "Edit";
+	$scope.mode = "edit";
 	$scope.employees = EmployeeService;
+	$scope.tabs = [
+		{
+			'title': 'Informações Pessoais',
+			'contentTag' : 'info-pessoal'
+		},
+		{
+			'title': 'Informações Profissionais',
+			'contentTag' : 'info-profissional'
+		},
+		{
+			'title': 'Documentos',
+			'contentTag' : 'documentos'
+		},
+		{
+			'title': 'Ativos alocados',
+			'contentTag' : 'ativos'
+		},
+		{
+			'title': 'Relatórios',
+			'contentTag' : 'relatorios'
+		},
+		{
+			'title': 'Emergência',
+			'contentTag' : 'emergencia'
+		},
+		{
+			'title': 'Observações',
+			'contentTag' : 'obs'
+		}		
+	];
+	$scope.tabs.activeTab = 'info-pessoal';
 
 	$scope.employees.loadEmployees().then(function(){
 		$scope.employees.selectedEmployee = $scope.employees.getEmployee($stateParams.cpf);
@@ -152,7 +214,6 @@ app.service('EmployeeService', function(Employee, $q, $rootScope){
 			self.isLoading = true;
 			self.persons = [];
 			Employee.get(function(data){
-				console.log(data);
 				angular.forEach(data.results, function(person){
 					self.persons.push(new Employee(person));
 				});
@@ -166,6 +227,8 @@ app.service('EmployeeService', function(Employee, $q, $rootScope){
 				var obj = self.persons[i];
 				if (obj.cpf == cpf) {
 					return obj;
+				} else {
+					console.log("User not found.");
 				}
 			}
 		},

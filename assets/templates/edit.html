@@ -1,34 +1,52 @@
-<div class="col-md-8 col-md-offset-2" >
+<div class="col-md-3">
+	<div class="btn-group-vertical btn-block"  ng-model="tabs.activeTab">
+	  <button 
+	  	class="btn btn-default  {{ tabs.activeTab == tab.contentTag ? 'active' : ''}}" 
+	  	ng-repeat="tab in tabs"
+	  	ng-click="tabs.activeTab = tab.contentTag"
+		>
+	    {{ tab.title }}
+	  </button>
+	  <div class="clearfix"></div>
+	</div>
+</div>
+<div class="col-md-9" >
 	<form class="form-horizontal"
 	      ng-submit="save()"
 	      novalidate >
 		<div class="panel panel-default" >
 			<div class="panel-heading" >
+				<div class="row">
+					<div class="col-sm-6">
+						<h4 ng-if="mode == 'create'">Adicionar funcionário</h4>
+						<h4 ng-if="mode == 'edit'">
+							{{ employees.selectedEmployee.name }} 
+							{{ employees.selectedEmployee.surname }}
+						</h4>
+					</div>
+					<div class="col-sm-6">
+						<div class="pull-right" >
+							<button class="btn btn-primary btn-sm"
+							        ladda="employees.isSaving"
+							        type="submit" >
+								<span ng-if="mode == 'edit'" >Salvar</span >
+								<span ng-if="mode == 'create'" >Adicionar</span >
+							</button >
 
-				{{ mode }}
-
-				<div class="pull-right" >
-					<button class="btn btn-primary btn-sm"
-					        ladda="employees.isSaving"
-					        type="submit" >
-						<span ng-if="mode == 'Edit'" >Save</span >
-						<span ng-if="mode == 'Create'" >Create</span >
-					</button >
-
-					<button class="btn btn-danger btn-sm"
-					        ladda="employees.isDeleting"
-					        ng-if="mode == 'Edit'"
-					        ng-click="remove()" >Delete
-					</button >
-				</div >
-				<div class="clearfix" ></div >
-
+							<button class="btn btn-danger btn-sm"
+							        ladda="employees.isDeleting"
+							        ng-if="mode == 'edit'"
+							        ng-click="remove()" >Deletar
+							</button >
+						</div >
+						<div class="clearfix" ></div >
+					</div>
+				</div>
 			</div >
-			<div class="panel-body" >
-
-				<ng-include src="'assets/templates/form.html'" ></ng-include >
-
-			</div >
+			<ul class="list-group">
+    			<ng-include src="'assets/templates/form.html'" ></ng-include >
+			</ul>
+				
 		</div >
 	</form >
 </div >
