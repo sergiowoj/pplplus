@@ -1,18 +1,16 @@
 <div class="col-md-6" >
   <div class="well well-sm" >
     <div class="row" >
-      <div class="col-md-4" >
+      <div class="col-sm-4" >
         <img ng-src="{{ employee.photo }}"
              alt=""
-             class="img-rounded img-responsive" />
+             class="img-rounded img-responsive"/>
       </div >
-      <div class="col-md-8" >
+      <div class="col-sm-8" >
         <h4 >{{ employee.name }} {{ employee.surname }} 
-          <i class="fa"
-             ng-class="{'fa-female':employee.sex == 'F', 'fa-male': employee.sex == 'M'}" ></i >
         </h4 >
         <p >
-          <i class="fa fa-envelope-o" ></i >
+          <span style="font-size: 10px;" class="glyphicon glyphicon-envelope" ></span>
 					{{ employee.email }}
           <br />
           <i class="fa fa-gift" ></i >
@@ -23,14 +21,14 @@
 					<button type="button"
 					        class="btn btn-default btn-sm"
 							    ui-sref="edit({cpf:employee.cpf})">
-						<i class="fa fa-pencil"></i>&nbsp;Edit
+						<span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit
 					</button >
 
 					<button type="button"
 					        class="btn btn-danger btn-sm"
 					        ladda="isDeleting"
 							    ng-click="deleteEmployee()">
-						<i class="fa fa-trash"></i>&nbsp;Delete
+						<span class="glyphicon glyphicon-trash"></span>&nbsp;Delete
 					</button >
 
       </div >

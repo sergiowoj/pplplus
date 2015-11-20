@@ -34,12 +34,36 @@ class Employees extends REST_Controller {
         // Get employee id from url
         $id = $this->get_uri_params();
 
-        //Get employee content from database
-        $this->load->database();
-        $query = $this->db->query('SELECT * FROM employee');
         $employees = array();
+        $employees["ordering"] = $this->input->get('ordering');
+        $employees["search"] = $this->input->get('search');
+
+        if($employees["ordering"] != null){
+            $this->db->select('*');
+            $this->db->from('employee');
+            $this->db->order_by($employees["ordering"], "ASC"); 
+            $query = $this->db->get();
+        } else {
+            $this->db->select('*');
+            $this->db->from('employee');
+            $query = $this->db->get();
+        }
+
+        if($employees["search"] != null){
+            $this->db->select('*');
+            $this->db->from('employee');
+            $this->db->like('name', $employees["search"]);
+            $this->db->or_like('email', $employees["search"]);
+            $this->db->or_like('phones', $employees["search"]);
+            if($employees["ordering"] != null){
+                $this->db->order_by($employees["ordering"], "ASC"); 
+            }
+            $query = $this->db->get();
+        } 
+
         $employees["results"] = $query->result();
         $employees["count"] = count($employees["results"]);
+        
 
         // If the id parameter doesn't exist return all the employees
         if ($id === NULL) {
@@ -92,7 +116,7 @@ class Employees extends REST_Controller {
     public function index_post() {
         $data = json_decode(trim(file_get_contents('php://input')), true);
 
-        $this->load->database();
+        // $this->load->database();
         $this->db->insert('employee', $data);
 
         $message = array('message'=>'Employee created.');
@@ -103,7 +127,7 @@ class Employees extends REST_Controller {
         // Get employee id from url
         $id = $this->get_uri_params();
 
-        $this->load->database();
+        // $this->load->database();
         $this->db->delete('employee', array('cpf'=>$id));
 
         // $this->some_model->delete_something($id);
@@ -121,7 +145,7 @@ class Employees extends REST_Controller {
 
         $data = json_decode(trim(file_get_contents('php://input')), true);
 
-        $this->load->database();
+        // $this->load->database();
         $this->db->where('cpf', $id);
         $this->db->update('employee', $data);
 

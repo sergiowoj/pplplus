@@ -220,6 +220,8 @@ app.service('EmployeeService', function(Employee, $q, $rootScope){
 				self.isLoading = false;
 				d.resolve();
 			});
+			console.log("Carreguei usuarios no metodo loadEmployees");
+			console.log(self.persons);
 			return d.promise;
 		},
 		'getEmployee': function(cpf){

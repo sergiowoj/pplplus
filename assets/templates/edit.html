@@ -1,11 +1,12 @@
 <div class="col-md-3">
 	<div class="btn-group-vertical btn-block"  ng-model="tabs.activeTab">
 	  <button 
-	  	class="btn btn-default  {{ tabs.activeTab == tab.contentTag ? 'active' : ''}}" 
+	  	style="text-align: left!important;"
+	  	class="btn btn-default {{ tabs.activeTab == tab.contentTag ? 'active' : ''}}" 
 	  	ng-repeat="tab in tabs"
 	  	ng-click="tabs.activeTab = tab.contentTag"
 		>
-	    {{ tab.title }}
+	    <span class="{{tab.glyphiconClass}}"></span>&nbsp;&nbsp;{{ tab.title }}
 	  </button>
 	  <div class="clearfix"></div>
 	</div>

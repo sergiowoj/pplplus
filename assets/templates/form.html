@@ -1,10 +1,13 @@
 
 <li ng-show="tabs.activeTab == 'info-pessoal'" class="list-group-item">
 	<h4>Informações Pessoais</h4>
-	<div class="col-md-2">
-		<img ng-src="{{ employees.selectedEmployee.photo }}" alt="" height="140px">
+	<div class="col-md-10">
 		<div class="form-group" >
-			<div class="col-sm-12" >
+			<label class="col-sm-3 control-label" >Foto do perfil</label >
+			<div class="col-sm-2" >
+				<img ng-src="{{ employees.selectedEmployee.photo }}" alt="" height="100px" class="img-thumbnail">
+			</div>
+			<div class="col-sm-6" >
 				<input type="file"
 				       class="form-control"
 				       name="photo"
@@ -12,8 +15,6 @@
 						/>
 			</div >
 		</div >
-	</div>
-	<div class="col-md-10">
 		<div class="form-group" >
 			<label class="col-sm-3 control-label" >Nome</label >
 			<div class="col-sm-4" >
@@ -220,7 +221,18 @@
 	<div class="form-group" >
 		<label class="col-sm-3 control-label" >Dados bancários</label >
 		<div class="col-sm-4" >
-			<select name="bank"
+			<input type="text" 
+				name="bank" 
+				placeholder="Banco" 
+				class="form-control"
+				ng-keyup="bankSearch(searchTerm)"
+				ng-model="searchTerm">
+				<ul>
+					<li style="display:block; border:1px solid black; padding: 4px;" 
+					ng-repeat="tip in tips" ng-click="searchTerm = tip.name" >{{ tip.name }}</li>
+				</ul>
+			</input>
+			<!-- <select name="bank"
 			        class="form-control"
 			        ng-model="employees.selectedEmployee.bank"
 			        >
@@ -231,7 +243,7 @@
 				<option value="hsbc" >HSBC</option >
 				<option value="bb" >Banco do Brasil</option >
 				<option value="outro" >Outro</option >
-			</select >
+			</select > -->
 		</div >
 	</div >
 	<div class="form-group" >
@@ -262,4 +274,25 @@
 				/>
 		</div >
 	</div >
-</li>		
+</li>	
+
+<li ng-show="tabs.activeTab == 'documentos'" class="list-group-item">
+	<h4>Documentos</h4>
+	<p>Sem documentos para listar.</p>
+</li>
+<li ng-show="tabs.activeTab == 'ativos'" class="list-group-item">
+	<h4>Ativos alocados</h4>
+	<p>Sem ativos para este funcionário.</p>
+</li>
+<li ng-show="tabs.activeTab == 'relatorios'" class="list-group-item">
+	<h4>Relatórios</h4>
+	<p>Sem dados para gerar relatório.</p>
+</li>
+<li ng-show="tabs.activeTab == 'emergencia'" class="list-group-item">
+	<h4>Contatos de emergência</h4>
+	<p></p>
+</li>
+<li ng-show="tabs.activeTab == 'obs'" class="list-group-item">
+	<h4>Observações</h4>
+	<p></p>
+</li>

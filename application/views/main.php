@@ -13,9 +13,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	      rel="stylesheet" >
 	<link href="assets/libs/ladda/dist/ladda-themeless.min.css"
 	      rel="stylesheet" >
+	<link href="assets/style.css" 
+		  rel="stylesheet" >
 </head>
 <body>
-	<nav class="navbar navbar-inverse" >
+	<nav class="navbar navbar-inverse navbar-fixed-top" >
 		<div class="container" >
 			<div class="navbar-header" >
 				<a class="navbar-brand"
@@ -43,7 +45,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="container-fluid main-container">
 		<div ui-view="right-menu"></div>
 		<div ui-view="main"></div>
-
 	</div>
 	
 	<script src="assets/libs/angular/angular.min.js" ></script >
@@ -59,6 +60,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script src="assets/libs/angular-strap/dist/angular-strap.tpl.min.js" ></script >
 	<script src="assets/libs/angularjs-toaster/toaster.min.js" ></script >
 	<script src="assets/libs/ui-router/release/angular-ui-router.min.js" ></script >
-	<script src="assets/main.js" ></script >
+	<script src="assets/angular/app.js"></script >
+	<script src="assets/angular/employee/service.js" ></script >
+	<script src="assets/angular/employee/controller.js" ></script >
+	<script src="assets/angular/employee/directive.js" ></script >
+	<script src="assets/angular/login/service.js" ></script >
+	<script src="assets/angular/login/controller.js" ></script >
+	
 </body>
 </html>
