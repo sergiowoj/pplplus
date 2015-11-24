@@ -1,7 +1,7 @@
 <div class="col-md-10">
 	<div class="row">
-		<form class="navbar navbar-form" >
-			<div class="form-group" >
+		<div class="actions-bar navbar navbar-form" >
+			<div class="search-employee form-group col-sm-5" >
 				<input type="text"
 				       class="form-control"
 				       id="name"
@@ -9,22 +9,50 @@
 				       ng-model-options="{ debounce: 300 }"
 				       placeholder="Buscar funcionário"
 						/>
-			</div >
-			<div class="form-group" >
 				<select class="form-control"
 				        ng-model="employees.ordering" >
-					<option value="" selected disabled >Ordernar por</option>
-					<option value="name" >Nome</option>
-					<option value="email" >Email</option>
+					<option value="name" >Ordenar por nome</option>
+					<option value="email" >Ordernar por email</option>
 				</select >
 			</div >
-		</form >
+
+			<div class="view-type form-group col-sm-4" >
+				Visualizar
+				<button ng-click="viewType = 'grid'" class="btn btn-default btn-card-view">
+					<span class="glyphicon glyphicon-th-large"></span>
+					Cards
+				</button>
+				<button ng-click="viewType = 'list'" class="btn btn-default btn-list-view">
+					<span class="glyphicon glyphicon-th-list"></span>
+					Lista
+				</button>
+			</div>
+
+			<div class="col-sm-3">
+				<a class="btn btn-primary pull-right" ui-sref="create">
+					<span class="glyphicon glyphicon-plus"></span>
+					Adicionar funcionário
+				</a >
+			</div>
+		</div>
 	</div>
 	<div class="row">
-		<cc-card 
-			ng-repeat="employee in employees.persons"
-			employee="employee">
-		</cc-card>
+		<div ng-if="viewType == 'grid'" class="row card-view">
+			<cc-card 
+				ng-repeat="employee in employees.persons"
+				employee="employee">
+			</cc-card>
+		</div>
+
+		<table ng-if="viewType == 'list'" class="table list-view">
+			<tr cc-list
+				ng-repeat="employee in employees.persons"
+				employee="employee"
+				>
+			</tr>
+		</table>
+
+
 	</div>
 	<cc-spinner 
 		is-loading="employees.isLoading"></cc-spinner>

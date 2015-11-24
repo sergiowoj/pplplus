@@ -1,0 +1,27 @@
+
+  <td>
+    <img ng-src="{{ employee.photo }}" class="img-circle" height="30px"/>
+  </td>
+  <td>
+    {{ employee.name }} {{ employee.surname }} 
+  </td>
+  <td>
+      <span style="font-size: 10px;" class="glyphicon glyphicon-phone" ></span>
+  		{{ employee.phones }}
+  		
+  </td>
+
+  <td style="text-align:right;">
+  	<button type="button"
+  	        class="btn btn-default btn-sm"
+  			    ui-sref="edit({cpf:employee.cpf})">
+  		<span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit
+  	</button >
+
+  	<button type="button"
+  	        class="btn btn-danger btn-sm"
+  	        ladda="isDeleting"
+  			    ng-click="deleteEmployee()">
+  		<span class="glyphicon glyphicon-trash"></span>&nbsp;Delete
+  	</button >
+  </td>

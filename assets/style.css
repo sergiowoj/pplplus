@@ -1,1 +1,32 @@
 body { padding-top: 70px; }
+
+ul.list-view { list-style: none; padding: 0;}
+ul.list-view .list-item { border: 1px solid #EEE; line-height: 30px; padding: 10px 0px;}
+
+.actions-bar { padding-left: 0; padding-right: 0; }
+.actions-bar .search-employee { }
+.actions-bar .order-employees { }
+.actions-bar .view-type { padding-left: 15px; padding-right: 15px; }
+
+.btn-card-view { border-radius: 5px 0px 0px 5px!important; }
+.btn-list-view { border-radius: 0px 5px 5px 0px!important; margin-left: -5px; }
+
+.card-view {}
+
+.bank-selection { position:relative; }
+
+.bank-selection ul.bank-tips {
+	max-height: 100px;
+	overflow-y: scroll;
+	position: absolute;
+	z-index: 100;
+	margin: 0;
+    padding: 2px;
+    border-radius: 1px 1px 5px 5px;
+    background-color: #FFF;
+    border: 1px solid #CCC;
+    list-style: none
+}
+.bank-selection ul.bank-tips li.tip-title { color: #666; font-size: 10px; padding: 1px 5px;}
+.bank-selection ul.bank-tips li.tip { padding: 1px 5px;}
+.bank-selection ul.bank-tips li.tip:hover { cursor: default; background-color: #DDD; }

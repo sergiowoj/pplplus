@@ -29,12 +29,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
 
 			<div class="collapse navbar-collapse" >
-				<ul class="nav navbar-nav navbar-right" >
+				<ul class="nav navbar-nav" >
 					<li ui-sref-active="active">
-						<a ui-sref="list" >Search</a >
-					</li >
-					<li ui-sref-active="active" >
-						<a ui-sref="create"  >Create</a >
+						<a ui-sref="list" >Principal</a >
 					</li >
 				</ul >
 			</div >

@@ -20,6 +20,7 @@ app.service('EmployeeService', function(Employee, $q, $rootScope){
 		'ordering': 'name',
 		'loadEmployees': function(){
 			var d = $q.defer();
+
 			if(!self.isLoading){
 				self.isLoading = true;
 
@@ -39,15 +40,10 @@ app.service('EmployeeService', function(Employee, $q, $rootScope){
 			}
 			return d.promise;
 		},
-		'getEmployee': function(cpf){
-			for (var i = 0; i < self.persons.length; i++) {
-				var obj = self.persons[i];
-				if (obj.cpf == cpf) {
-					return obj;
-				} else {
-					console.log("User not found.");
-				}
-			}
+		'getEmployee': function(id){
+			Employee.get({cpf:id}, function(data){
+				self.selectedEmployee = data;
+			});
 		},
 		'createEmployee': function(employee){
 			var d = $q.defer();
@@ -114,25 +110,5 @@ app.service('EmployeeService', function(Employee, $q, $rootScope){
 	self.watchFilters();
 	self.loadEmployees();
 
-	return self;
-});
-
-
-app.factory('BankList', function($resource){
-	return $resource("http://localhost/pplplus/api/banks/");
-});
-
-app.service('BankListService', function(BankList, $q, $rootScope){
-	var self = {
-		'bankList': [],
-		'loadBanks': function(){
-			var d = $q.defer();
-			BankList.get(function(banks){
-				self.bankList = banks;
-				d.resolve();
-			});
-			return d.promise;
-		}
-	}
 	return self;
 });

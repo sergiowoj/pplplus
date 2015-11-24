@@ -2,6 +2,7 @@
 
 app.controller('EmployeeListController', function($scope, $state, EmployeeService){
 	$scope.employees = EmployeeService;
+	$scope.viewType = "grid";
 
 	$scope.loadEmployees = function(){
 		$scope.employees.loadEmployees();
@@ -51,9 +52,11 @@ app.controller('EmployeeCreateController', function($scope, $state, EmployeeServ
 	};
 });
 
-app.controller('EmployeeEditController', function($http, $scope, $stateParams, $state, EmployeeService, BankListService){
+app.controller('EmployeeEditController', function($http, $scope, $stateParams, $state, EmployeeService){
 	$scope.mode = "edit";
 	$scope.employees = EmployeeService;
+	$scope.employees.getEmployee($stateParams.cpf);
+	$scope.searchTerm = "";
 
 	$scope.tabs = [
 		{
@@ -94,25 +97,30 @@ app.controller('EmployeeEditController', function($http, $scope, $stateParams, $
 	];
 	$scope.tabs.activeTab = 'info-pessoal';
 
-	$scope.searchTerm = "";
-	$scope.bankSearch = function(search){
-		if(search == ""){
+	$scope.setSearchTerm = function(term){
+		$scope.searchTerm = term;
+		$scope.completing = false;
+	}
+
+	$scope.bankSearch = function(bank){
+		$scope.setSearchTerm(bank);
+		if($scope.searchTerm == ""){
 			$scope.completing = false;
 		} else {
-			$http.post('http://localhost/pplplus/api/banks', {"search": search})
+			$http.post('http://localhost/pplplus/api/banks', {"search": $scope.searchTerm})
 				.success(function(data){
-					$scope.completing = true;
-					$scope.tips = data.results;
+					if(data.count > 0) {
+						$scope.completing = true;
+						$scope.tips = data.results;
+					} else {
+						$scope.completing = false;
+						$scope.tips = [];
+					}
 				})
 				.error(function(data){
-
 				});
 		}
 	};
-
-	$scope.employees.loadEmployees().then(function(){
-		$scope.employees.selectedEmployee = $scope.employees.getEmployee($stateParams.cpf);
-	});
 
 	$scope.save = function () {
 		$scope.employees.updateEmployee($scope.employees.selectedEmployee).then(function () {
