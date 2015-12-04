@@ -22,7 +22,10 @@
 				       class="form-control"
 				       name="name"
 				       ng-model="employees.selectedEmployee.name"
-				       required />
+				       ng-maxlength="20"
+				       required
+				       ng-maxlength-err-type="maxlength"
+				       required-err-type="required" />
 			</div >
 
 			<div class="col-sm-4" >
@@ -31,7 +34,10 @@
 				       class="form-control"
 				       name="surname"
 				       ng-model="employees.selectedEmployee.surname"
-				       required />
+				       ng-maxlength="20"
+				       required
+				       ng-maxlength-err-type="maxlength"
+				       required-err-type="required" />
 			</div >
 		</div >
 		<div class="form-group">
@@ -41,6 +47,12 @@
 				       name="cpf"
 				       class="form-control"
 				       ng-model="employees.selectedEmployee.cpf"
+				       ng-minlength="11"
+				       ng-maxlength="11"
+				       required
+				       ng-minlength-err-type="minlength"
+				       ng-maxlength-err-type="maxlength"
+				       required-err-type="required"
 					/>
 			</div >
 		</div>
@@ -51,19 +63,23 @@
 				       name="rg"
 				       class="form-control"
 				       ng-model="employees.selectedEmployee.rg"
+				       required
+				       required-err-type="required"
 					/>
 			</div >
 		</div>
 		<div class="form-group" >
 			<label class="col-sm-3 control-label" >Sexo</label >
-			<div class="col-sm-2" >
-
-				<select name="sex"
+			<div class="col-sm-4" >
+				<select name="gender"
 				        class="form-control"
-				        ng-model="employees.selectedEmployee.sex"
-				        id="" disabled>
-					<option value="M" >Masculino</option >
-					<option value="F" >Feminino</option >
+				        ng-model="employees.selectedEmployee.gender"
+				        id=""
+				        required
+				        required-err-type="required"
+				        >
+					<option value="Masculino" >Masculino</option >
+					<option value="Feminino" >Feminino</option >
 				</select >
 			</div >
 		</div >
@@ -87,7 +103,9 @@
 				       name="email"
 				       class="form-control"
 				       ng-model="employees.selectedEmployee.email"
-				       required />
+				       required
+				       required-err-type="required"
+				       email-err-type="email" />
 			</div >
 		</div>
 		<div class="form-group" >
@@ -144,7 +162,17 @@
 
 <li ng-show="tabs.activeTab == 'info-profissional'" class="list-group-item">
 	<h4>Informações Profissionais</h4>
-
+	<div class="form-group" >
+		<label class="col-sm-3 control-label" >Departamento</label >
+		<div class="col-sm-6" >
+			<input type="text"
+			       name="department"
+			       class="form-control"
+			       ng-model="employees.selectedEmployee.department"
+				   required
+				   required-err-type="required" />
+		</div >
+	</div >
 	<div class="form-group" >
 		<label class="col-sm-3 control-label" >Cargo</label >
 		<div class="col-sm-6" >
@@ -152,7 +180,8 @@
 			       name="job_title"
 			       class="form-control"
 			       ng-model="employees.selectedEmployee.job_title"
-				   required />
+				   required
+				   required-err-type="required" />
 		</div >
 	</div >
 	<div class="form-group" >
@@ -173,6 +202,10 @@
 			       name="number"
 			       class="form-control"
 			       ng-model="employees.selectedEmployee.number"
+			       required
+			       required-err-type="required"
+			       ng-maxlength="5"
+			       ng-maxlength-err-type="maxlength"
 				/>
 		</div >
 	</div >
@@ -218,19 +251,22 @@
 	</div >
 	<div class="form-group">
 		<label class="col-sm-3 control-label" >Dados bancários</label >
-		<div class="col-sm-4 bank-selection">
+		<div class="col-sm-6 bank-selection">
 			<input type="text" 
 				name="bank" 
 				placeholder="Banco" 
 				class="form-control"
 				ng-keyup="bankSearch(searchTerm)"
 				ng-model="$parent.searchTerm"
+				value="{{ employees.selectedEmployee.bank_id }}"
+				required
+				required-err-type="required"
 				/ >
 			<ul class="bank-tips" ng-show="completing">
 				<li class="tip-title">Bancos com <b>{{ searchTerm }}</b></li>
 				<li class="tip" 
 					ng-repeat="tip in tips" 
-					ng-click="setSearchTerm(tip.name)">{{ tip.name }}
+					ng-click="setSearchTerm(tip.name, tip.id)">({{ tip.code }}) {{ tip.name }}
 				</li>
 			</ul>
 			<!-- <select name="bank"

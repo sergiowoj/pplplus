@@ -41,6 +41,7 @@ class Employees extends REST_Controller {
         if($employees["ordering"] != null){
             $this->db->select('*');
             $this->db->from('employee');
+            // $this->db->join('bank', );
             $this->db->order_by($employees["ordering"], "ASC"); 
             $query = $this->db->get();
         } else {
@@ -95,7 +96,7 @@ class Employees extends REST_Controller {
         if (!empty($employees)) {
             foreach ($employees["results"] as $key => $value)
             {
-                if ($value->cpf === $id)
+                if ($value->id === $id)
                 {
                     $employee = $value;
                 }
@@ -145,11 +146,10 @@ class Employees extends REST_Controller {
 
         $data = json_decode(trim(file_get_contents('php://input')), true);
 
-        // $this->load->database();
-        $this->db->where('cpf', $id);
+        $this->db->where('id', $id);
         $this->db->update('employee', $data);
 
-        $message = array('message'=>'Employee updated.');
+        $message = array('message'=>'Employee updated.', 'id'=>$id);
         $this->set_response($message, REST_Controller::HTTP_CREATED); // CREATED (201) being the HTTP response code
     }
 }

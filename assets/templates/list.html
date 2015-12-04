@@ -1,4 +1,4 @@
-<div class="col-md-10">
+<div class="col-md-12">
 	<div class="row">
 		<div class="actions-bar navbar navbar-form" >
 			<div class="search-employee form-group col-sm-5" >
@@ -37,20 +37,24 @@
 		</div>
 	</div>
 	<div class="row">
-		<div ng-if="viewType == 'grid'" class="row card-view">
-			<cc-card 
-				ng-repeat="employee in employees.persons"
-				employee="employee">
-			</cc-card>
+		<div class="col-sm-12" style="padding: 0;">
+			<div ng-if="viewType == 'grid'" class="card-view">
+				<cc-card 
+					ng-repeat="employee in employees.persons"
+					employee="employee">
+				</cc-card>
+			</div>
 		</div>
 
-		<table ng-if="viewType == 'list'" class="table list-view">
-			<tr cc-list
-				ng-repeat="employee in employees.persons"
-				employee="employee"
-				>
-			</tr>
-		</table>
+		<div class="col-sm-12">
+			<table ng-if="viewType == 'list'" class="table list-view">
+				<tr cc-list
+					ng-repeat="employee in employees.persons"
+					employee="employee"
+					>
+				</tr>
+			</table>
+		</div>
 
 
 	</div>

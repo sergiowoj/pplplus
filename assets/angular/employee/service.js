@@ -1,7 +1,7 @@
 // app.module("ppl.employee.service");
 
 app.factory('Employee', function($resource){
-	return $resource("http://localhost/pplplus/api/employees/:cpf", {cpf:'@cpf'}, {
+	return $resource("http://localhost/pplplus/api/employees/:id", {id:'@id'}, {
 		update: {
 			method: 'PUT'
 		}
@@ -40,10 +40,13 @@ app.service('EmployeeService', function(Employee, $q, $rootScope){
 			}
 			return d.promise;
 		},
-		'getEmployee': function(id){
-			Employee.get({cpf:id}, function(data){
+		'getEmployee': function(employeeId){
+			var d = $q.defer();
+			Employee.get({id:employeeId}, function(data){
 				self.selectedEmployee = data;
+				d.resolve();
 			});
+			return d.promise;
 		},
 		'createEmployee': function(employee){
 			var d = $q.defer();

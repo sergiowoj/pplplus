@@ -1,5 +1,18 @@
 <div class="col-md-3">
-	<div class="btn-group-vertical btn-block"  ng-model="tabs.activeTab">
+	<div class="nav" id="navbar-example">
+		<ul class="nav nav-stacked" id="sidebar" role="tablist">
+			<li ng-repeat="tab in tabs" 
+				class="section-selector"
+				ng-click="tabs.activeTab = tab.contentTag">
+				
+					<span class="{{tab.glyphiconClass}}"></span>
+					&nbsp;&nbsp;{{ tab.title }}
+				
+			</li>
+		</ul>
+	</div>
+
+	<!-- <div class="btn-group-vertical btn-block"  ng-model="tabs.activeTab">
 	  <button 
 	  	style="text-align: left!important;"
 	  	class="btn btn-default {{ tabs.activeTab == tab.contentTag ? 'active' : ''}}" 
@@ -9,11 +22,12 @@
 	    <span class="{{tab.glyphiconClass}}"></span>&nbsp;&nbsp;{{ tab.title }}
 	  </button>
 	  <div class="clearfix"></div>
-	</div>
+	</div> -->
 </div>
 <div class="col-md-9" >
 	<form class="form-horizontal"
 	      ng-submit="save()"
+	      name="editForm"
 	      novalidate >
 		<div class="panel panel-default" >
 			<div class="panel-heading" >
@@ -42,9 +56,14 @@
 						</div >
 						<div class="clearfix" ></div >
 					</div>
+					<div class="clearfix" ></div >
+					<div ng-show="!editForm.$valid && editForm.$submitted" style="padding: 0px 15px; color: #a94442;">
+						Verifique a existência de erros no formulário.
+					</div> 
 				</div>
 			</div >
-			<ul class="list-group">
+			<ul class="list-group" 
+				data-target="#navbar-example">
     			<ng-include src="'assets/templates/form.html'" ></ng-include >
 			</ul>
 				

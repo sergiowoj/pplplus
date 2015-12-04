@@ -14,6 +14,27 @@ class Banks extends REST_Controller {
         $this->methods['index_delete']['limit'] = 50; // 50 requests per hour per user/key
 	}
 
+	public function index_get(){
+		$id = $this->get_uri_params();
+
+		$this->db->select('id, name, code');
+		$this->db->from('bank');
+		$this->db->where('id', $id);
+		$query = $this->db->get();
+
+		$bank = $query->row();
+
+		if (!empty($bank)) {
+            $this->set_response($bank, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+        }
+        else {
+            $this->set_response([
+                'status' => FALSE,
+                'message' => 'Bank not found.'
+            ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+        }
+	}
+
 	public function index_post(){
 
 		$data = json_decode(trim(file_get_contents('php://input')), true);

@@ -1,4 +1,4 @@
-<div class="col-md-6" >
+<div class="col-md-3" >
   <div class="well well-sm" >
     <div class="row" >
       <div class="col-sm-4" >
@@ -9,9 +9,9 @@
       <div class="col-sm-8" >
         <h4 >{{ employee.name }} {{ employee.surname }} 
         </h4 >
-        <p >
-          <span style="font-size: 10px;" class="glyphicon glyphicon-envelope" ></span>
-					{{ employee.email }}
+        <p style="overflow: hidden;">
+          <!-- <span style="font-size: 10px;" class="glyphicon glyphicon-envelope" ></span> -->
+          {{ employee.email }}
           <br />
           <i class="fa fa-gift" ></i >
 					CPF: {{ employee.cpf }}
@@ -20,7 +20,7 @@
 
 					<button type="button"
 					        class="btn btn-default btn-sm"
-							    ui-sref="edit({cpf:employee.cpf})">
+							    ui-sref="edit({id:employee.id})">
 						<span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit
 					</button >
 

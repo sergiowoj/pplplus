@@ -55,8 +55,11 @@ app.controller('EmployeeCreateController', function($scope, $state, EmployeeServ
 app.controller('EmployeeEditController', function($http, $scope, $stateParams, $state, EmployeeService){
 	$scope.mode = "edit";
 	$scope.employees = EmployeeService;
-	$scope.employees.getEmployee($stateParams.cpf);
+	$scope.employees.getEmployee($stateParams.id).then(function(){
+		$scope.getBankById($scope.employees.selectedEmployee.bank_id);
+	});
 	$scope.searchTerm = "";
+
 
 	$scope.tabs = [
 		{
@@ -97,8 +100,9 @@ app.controller('EmployeeEditController', function($http, $scope, $stateParams, $
 	];
 	$scope.tabs.activeTab = 'info-pessoal';
 
-	$scope.setSearchTerm = function(term){
+	$scope.setSearchTerm = function(term, bank_id){
 		$scope.searchTerm = term;
+		$scope.employees.selectedEmployee.bank_id = bank_id;
 		$scope.completing = false;
 	}
 
@@ -121,6 +125,15 @@ app.controller('EmployeeEditController', function($http, $scope, $stateParams, $
 				});
 		}
 	};
+
+	$scope.getBankById = function(id){
+		$http.get('http://localhost/pplplus/api/banks/'+id)
+				.success(function(data){
+					$scope.setSearchTerm(data.name, data.id);
+				})
+				.error(function(data){
+				});
+	}
 
 	$scope.save = function () {
 		$scope.employees.updateEmployee($scope.employees.selectedEmployee).then(function () {
