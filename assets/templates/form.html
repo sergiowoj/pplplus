@@ -1,22 +1,33 @@
 <li ng-show="tabs.activeTab == 'info-pessoal'" class="list-group-item">
 	<h4>Informações Pessoais</h4>
-	<div class="col-md-10">
 		<div class="form-group" >
-			<label class="col-sm-3 control-label" >Foto do perfil</label >
 			<div class="col-sm-2" >
-				<img ng-src="{{ employees.selectedEmployee.photo }}" alt="" height="100px" class="img-thumbnail">
+				<img ngf-thumbnail="picFile || employees.selectedEmployee.photo || 'assets/images/avatar.png'" class="img-thumbnail" height="250px">
 			</div>
-			<div class="col-sm-6" >
+			<div class="col-sm-6">
+				<label class="control-label" for="photo">Foto do perfil</label>
 				<input type="file"
 				       class="form-control"
 				       name="photo"
-				       ng-model="employees.selectedEmployee.photo"
-						/>
+				       ngf-select
+				       ng-model="picFile"  
+				       accept="image/*" 
+				       ngf-max-size="6MB" 
+				       />
+				       	<span 
+				       		class="btn btn-primary" 
+				       		style="margin-top: 10px" 
+				       		ng-click="uploadPic(picFile)"
+				       		ladda="isUploadingPhoto">Atualizar foto</span>
+				       	<span ng-show="picFile.result.uploaded">
+				       		{{ picFile.result.message }}
+				       	</span>
+				       
 			</div >
 		</div >
 		<div class="form-group" >
-			<label class="col-sm-3 control-label" >Nome</label >
 			<div class="col-sm-4" >
+				<label class="control-label" for="name">Nome</label >
 				<input type="text"
 					   placeholder="Nome"
 				       class="form-control"
@@ -27,8 +38,8 @@
 				       ng-maxlength-err-type="maxlength"
 				       required-err-type="required" />
 			</div >
-
 			<div class="col-sm-4" >
+				<label class="control-label" for="surname">Sobrenome</label >
 				<input type="text"
 					   placeholder="Sobrenome"
 				       class="form-control"
@@ -41,8 +52,8 @@
 			</div >
 		</div >
 		<div class="form-group">
-			<label class="col-sm-3 control-label" >CPF</label >
 			<div class="col-sm-4" >
+				<label class="control-label" for="cpf" >CPF</label >
 				<input type="text"
 				       name="cpf"
 				       class="form-control"
@@ -57,20 +68,19 @@
 			</div >
 		</div>
 		<div class="form-group">
-			<label class="col-sm-3 control-label" >RG</label >
 			<div class="col-sm-4" >
+				<label class="control-label" for="rg">RG</label >
 				<input type="text"
 				       name="rg"
 				       class="form-control"
 				       ng-model="employees.selectedEmployee.rg"
 				       required
-				       required-err-type="required"
-					/>
+				       required-err-type="required"/>
 			</div >
 		</div>
 		<div class="form-group" >
-			<label class="col-sm-3 control-label" >Sexo</label >
 			<div class="col-sm-4" >
+				<label class="control-label" for="gender" >Sexo</label >
 				<select name="gender"
 				        class="form-control"
 				        ng-model="employees.selectedEmployee.gender"
@@ -84,20 +94,19 @@
 			</div >
 		</div >
 		<div class="form-group" >
-			<label class="col-sm-3 control-label" >Data de nascimento</label >
 			<div class="col-sm-4" >
+				<label class="control-label" for="birthdate">Data de nascimento</label >
 				<input type="text"
 				       name="birthdate"
 				       class="form-control"
 				       ng-model="employees.selectedEmployee.birthdate"
-				       bs-datepicker
-						/>
+				       bs-datepicker/>
 			</div >
 
 		</div >
 		<div class="form-group" >
-			<label class="col-sm-3 control-label" >Contato</label >
 			<div class="col-sm-4" >
+				<label class="control-label" for="email">Contato</label >
 				<input type="email"
 					   placeholder="Email"
 				       name="email"
@@ -109,7 +118,8 @@
 			</div >
 		</div>
 		<div class="form-group" >
-			<div class="col-md-offset-3 col-sm-4" >
+			<div class="col-sm-4" >
+				<label class="control-label" for="phones">Telefone</label >
 				<input type="tel"
 					   placeholder="Telefone"
 				       name="phones"
@@ -119,8 +129,8 @@
 			</div >
 		</div >
 		<div class="form-group" >
-			<label class="col-sm-3 control-label" >Endereço</label >
 			<div class="col-sm-4" >
+				<label class="control-label" for="home_address1">Endereço</label >
 				<input type="text"
 					   placeholder="Endereço"
 				       name="home_address1"
@@ -129,6 +139,7 @@
 						/>
 			</div >
 			<div class="col-sm-4" >
+				<label class="control-label" for="home_address2">Endereço 2</label >
 				<input type="text"
 					   placeholder="Complemento"
 				       name="home_address2"
@@ -138,24 +149,25 @@
 			</div >
 		</div >
 		<div class="form-group">
-			<div class="col-md-offset-3 col-sm-4" >
+			<div class="col-sm-4" >
+				<label class="control-label" for="home_city">Cidade</label >
 				<input type="text"
 					   placeholder="Cidade"
-				       name="city"
+				       name="home_city"
 				       class="form-control"
-				       ng-model="employees.selectedEmployee.city"
-					   disabled	/>
+				       ng-model="employees.selectedEmployee.home_city"
+					   	/>
 			</div >
 			<div class="col-sm-4" >
+				<label class="control-label" for="home_state">Estado</label >
 				<input type="text"
-					   placeholder="Bairro"
-				       name="country"
+					   placeholder="Estado"
+				       name="home_state"
 				       class="form-control"
-				       ng-model="employees.selectedEmployee.country"
-						disabled	/>
+				       ng-model="employees.selectedEmployee.home_state"
+							/>
 			</div >
 		</div >
-	</div>
 	<div class="clearfix"></div>
 </li>
 
@@ -163,30 +175,35 @@
 <li ng-show="tabs.activeTab == 'info-profissional'" class="list-group-item">
 	<h4>Informações Profissionais</h4>
 	<div class="form-group" >
-		<label class="col-sm-3 control-label" >Departamento</label >
-		<div class="col-sm-6" >
-			<input type="text"
-			       name="department"
-			       class="form-control"
-			       ng-model="employees.selectedEmployee.department"
-				   required
-				   required-err-type="required" />
+		<div class="col-sm-6">
+			<label class="control-label" for="department" >Departamento</label >
+			<select name="department_id"
+				    class="form-control"
+				    ng-model="employees.selectedEmployee.department_id"
+				    required
+				    required-err-type="required">
+				<option value="1">Financeiro</option>
+				<option value="2">Comercial</option>
+				<option value="3">TI</option>
+				<option value="4">Recursos Humanos</option>
+				<option value="5">Operação</option>
+			</select>
 		</div >
 	</div >
 	<div class="form-group" >
-		<label class="col-sm-3 control-label" >Cargo</label >
 		<div class="col-sm-6" >
+			<label class="control-label" for="job_title">Cargo</label >
 			<input type="text"
 			       name="job_title"
 			       class="form-control"
 			       ng-model="employees.selectedEmployee.job_title"
 				   required
 				   required-err-type="required" />
-		</div >
+		</div>
 	</div >
 	<div class="form-group" >
-		<label class="col-sm-3 control-label" >Data de admissão</label >
 		<div class="col-sm-4" >
+			<label class="control-label" for="admission">Data de admissão</label >
 			<input type="text"
 			       name="admission"
 			       class="form-control"
@@ -196,8 +213,8 @@
 		</div >
 	</div >
 	<div class="form-group" >
-		<label class="col-sm-3 control-label" >Matrícula</label >
 		<div class="col-sm-4" >
+			<label class="control-label" for="number">Matrícula</label >
 			<input type="text"
 			       name="number"
 			       class="form-control"
@@ -209,10 +226,9 @@
 				/>
 		</div >
 	</div >
-
 	<div class="form-group" >
-		<label class="col-sm-3 control-label" >Endereço de trabalho</label >
 		<div class="col-sm-4" >
+			<label class="control-label" for="work_address1">Endereço de trabalho</label >
 			<input type="text"
 				placeholder="Rua, número e bairro"
 			    name="work_address1"
@@ -221,6 +237,7 @@
 				/>
 		</div >
 		<div class="col-sm-4" >
+			<label class="control-label" for="work_address2">Endereço de trabalho 2</label >
 			<input type="text"
 				placeholder="Complemento"
 				name="work_address2"
@@ -231,8 +248,8 @@
 	</div >
 	
 	<div class="form-group" >
-		<label class="col-sm-3 control-label" >Salário</label >
 		<div class="col-sm-4" >
+			<label class="control-label" for="base_sallary">Salário</label >
 			<input type="text"
 				placeholder="Salário base"
 			       name="base_sallary"
@@ -241,6 +258,7 @@
 				/>
 		</div >
 		<div class="col-sm-4" >
+			<label class="control-label" for="additional_sallary">Salário</label >
 			<input type="text"
 				placeholder="+ Adicional"
 			       name="additional_sallary"
@@ -250,8 +268,8 @@
 		</div >
 	</div >
 	<div class="form-group">
-		<label class="col-sm-3 control-label" >Dados bancários</label >
 		<div class="col-sm-6 bank-selection">
+			<label class="control-label" for="bank">Banco</label >
 			<input type="text" 
 				name="bank" 
 				placeholder="Banco" 
@@ -269,30 +287,20 @@
 					ng-click="setSearchTerm(tip.name, tip.id)">({{ tip.code }}) {{ tip.name }}
 				</li>
 			</ul>
-			<!-- <select name="bank"
-			        class="form-control"
-			        ng-model="employees.selectedEmployee.bank"
-			        >
-				<option value="" disabled selected >Banco</option >
-				<option value="itau" >Itaú</option >
-				<option value="bradesco" >Bradesco</option >
-				<option value="santander" >Santander</option >
-				<option value="hsbc" >HSBC</option >
-				<option value="bb" >Banco do Brasil</option >
-				<option value="outro" >Outro</option >
-			</select > -->
 		</div >
 	</div >
 	<div class="form-group" >
-		<div class="col-md-offset-3 col-sm-4" >
+		<div class="col-sm-4" >
+			<label class="control-label" for="bank_account_number">Conta corrente</label >
 			<input type="text"
 				placeholder="Número da conta"
-			       name="number"
-			       class="form-control"
-			       ng-model="employees.selectedEmployee.bank_account_number"
+			    name="bank_account_number"
+			    class="form-control"
+			    ng-model="employees.selectedEmployee.bank_account_number"
 				/>
 		</div >
 		<div class="col-sm-4" >
+			<label class="control-label" for="bank_agency_number">Agência</label >
 			<input type="text"
 				placeholder="Agência"
 			       name="bank_agency_number"
@@ -302,8 +310,8 @@
 		</div >
 	</div >
 	<div class="form-group" >
-		<label class="col-sm-3 control-label" >Dias de Trabalho</label >
 		<div class="col-sm-4" >
+			<label class="control-label" for="workdays">Dias de Trabalho</label >
 			<input type="text"
 			       name="workdays"
 			       class="form-control"

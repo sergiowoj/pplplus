@@ -71,6 +71,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script src="assets/libs/angular-strap/dist/angular-strap.tpl.min.js" ></script>
 	<script src="assets/libs/angularjs-toaster/toaster.min.js" ></script>
 	<script src="assets/libs/ui-router/release/angular-ui-router.min.js" ></script>
+	<script src="assets/libs/ng-file-upload/dist/ng-file-upload.min.js" ></script>
 	<script src="assets/angular/app.js"></script>
 	<script src="assets/angular/employee/service.js" ></script>
 	<script src="assets/angular/employee/controller.js" ></script>

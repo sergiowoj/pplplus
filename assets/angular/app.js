@@ -7,7 +7,8 @@ var app = angular.module('ppl', [
 	'mgcrea.ngStrap',
 	'toaster',
 	'ngAnimate',
-	'ui.router'
+	'ui.router',
+	'ngFileUpload'
 	]);
 
 app.config(function($stateProvider, $urlRouterProvider) {

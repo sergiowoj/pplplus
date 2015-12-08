@@ -9,10 +9,41 @@ app.controller('EmployeeListController', function($scope, $state, EmployeeServic
 	}
 });
 
-app.controller('EmployeeCreateController', function($scope, $state, EmployeeService){
+app.controller('EmployeeCreateController', function($scope, $state, EmployeeService, $http, Upload){
 	$scope.mode = "create";
 	$scope.employees = EmployeeService;
 	$scope.employees.selectedEmployee = {};
+
+	$scope.uploadPic = function(file) {
+	    file.upload = Upload.upload({
+	      url: 'upload',
+	      data: {file: file},
+	    });
+
+	    file.upload.then(function (response) {
+	        file.result = response.data;
+	        if(response.data.uploaded){
+	        	file.result.message = "Foto atualizada!";
+	        	$scope.employees.selectedEmployee.photo = response.data.photo_url;
+	        }	        
+	    }, function (response) {
+	      if (!response.data.uploaded)
+	      	if(response.data.err_message == 'ext_not_allowed'){
+	      		file.result.message = 'Extensão não permitida.';
+	      	} else if (response.data.err_message == 'file_size_exceeded'){
+	        	file.result.message = 'O arquivo deve ser menor que 2mb.';
+	        } else {
+	        	file.result.message = 'Erro ao salvar foto. Tente novamente.';
+	        }
+	    }, function (evt) {
+	    	if(evt.type == 'progress') {
+	    		$scope.isUploadingPhoto = true;
+	    	} else if (evt.type == 'load'){
+	    		$scope.isUploadingPhoto = false;
+	    	}
+	    });
+    };
+
 	$scope.tabs = [
 		{
 			'title': 'Informações Pessoais',
@@ -45,6 +76,41 @@ app.controller('EmployeeCreateController', function($scope, $state, EmployeeServ
 	];
 	$scope.tabs.activeTab = 'info-pessoal';
 
+	$scope.setSearchTerm = function(term, bank_id){
+		$scope.searchTerm = term;
+		$scope.employees.selectedEmployee.bank_id = bank_id;
+		$scope.completing = false;
+	}
+
+	$scope.bankSearch = function(bank){
+		$scope.setSearchTerm(bank);
+		if($scope.searchTerm == ""){
+			$scope.completing = false;
+		} else {
+			$http.post('http://localhost/pplplus/api/banks', {"search": $scope.searchTerm})
+				.success(function(data){
+					if(data.count > 0) {
+						$scope.completing = true;
+						$scope.tips = data.results;
+					} else {
+						$scope.completing = false;
+						$scope.tips = [];
+					}
+				})
+				.error(function(data){
+				});
+		}
+	};
+
+	$scope.getBankById = function(id){
+		$http.get('http://localhost/pplplus/api/banks/'+id)
+				.success(function(data){
+					$scope.setSearchTerm(data.name, data.id);
+				})
+				.error(function(data){
+				});
+	}
+
 	$scope.save = function () {
 		$scope.employees.createEmployee($scope.employees.selectedEmployee).then(function () {
 			$state.go("list");
@@ -52,12 +118,43 @@ app.controller('EmployeeCreateController', function($scope, $state, EmployeeServ
 	};
 });
 
-app.controller('EmployeeEditController', function($http, $scope, $stateParams, $state, EmployeeService){
+app.controller('EmployeeEditController', function($http, $scope, $stateParams, $state, EmployeeService, Upload){
 	$scope.mode = "edit";
 	$scope.employees = EmployeeService;
 	$scope.employees.getEmployee($stateParams.id).then(function(){
 		$scope.getBankById($scope.employees.selectedEmployee.bank_id);
 	});
+
+	$scope.uploadPic = function(file) {
+	    file.upload = Upload.upload({
+	      url: 'upload',
+	      data: {file: file},
+	    });
+
+	    file.upload.then(function (response) {
+	        file.result = response.data;
+	        if(response.data.uploaded){
+	        	file.result.message = "Foto atualizada!";
+	        	$scope.employees.selectedEmployee.photo = response.data.photo_url;
+	        }	        
+	    }, function (response) {
+	      if (!response.data.uploaded)
+	      	if(response.data.err_message == 'ext_not_allowed'){
+	      		file.result.message = 'Extensão não permitida.';
+	      	} else if (response.data.err_message == 'file_size_exceeded'){
+	        	file.result.message = 'O arquivo deve ser menor que 2mb.';
+	        } else {
+	        	file.result.message = 'Erro ao salvar foto. Tente novamente.';
+	        }
+	    }, function (evt) {
+	    	if(evt.type == 'progress') {
+	    		$scope.isUploadingPhoto = true;
+	    	} else if (evt.type == 'load'){
+	    		$scope.isUploadingPhoto = false;
+	    	}
+	    });
+    };
+
 	$scope.searchTerm = "";
 
 
